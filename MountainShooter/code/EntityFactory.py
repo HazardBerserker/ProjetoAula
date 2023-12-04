@@ -1,7 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import random
+
 from MountainShooter.code.Background import Background
-from MountainShooter.code.Const import WIN_WIDTH
+from MountainShooter.code.Const import WIN_WIDTH, WIN_HEIGHT
+from MountainShooter.code.Enemy import Enemy
+from MountainShooter.code.Player import Player
 
 
 class EntityFactory:
@@ -11,7 +15,15 @@ class EntityFactory:
         match entity_name:
             case 'Level1Bg':
                 list_bg = []
-                for i in range(7):
+                for i in range(6):
                     list_bg.append(Background(f'Level1Bg{i}', position))
                     list_bg.append(Background(f'Level1Bg{i}', (WIN_WIDTH, 0)))
                 return list_bg
+            case 'Player1':
+                return Player('Player1', (10, WIN_HEIGHT / 2 - 30))
+            case 'Player2':
+                return Player('Player2', (10, WIN_HEIGHT / 2 + 30))
+            case 'Enemy1':
+                return Enemy('Enemy1', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT)))
+            case 'Enemy2':
+                return Enemy('Enemy2', (WIN_WIDTH + 10, random.randint(0, WIN_HEIGHT)))
